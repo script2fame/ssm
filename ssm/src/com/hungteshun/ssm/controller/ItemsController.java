@@ -12,6 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hungteshun.ssm.po.ItemsCustom;
 import com.hungteshun.ssm.service.ItemsService;
 
+/**
+ * 
+ * @author hungteshun
+ *
+ */
+
 @Controller
 // 为了对url进行分类管理 ，可以在这里定义根路径，最终访问url是根路径+子路径
 // 比如：商品列表：/items/queryItems.action
@@ -44,4 +50,6 @@ public class ItemsController {
 		return modelAndView;
 
 	}
+	
+	
 }
