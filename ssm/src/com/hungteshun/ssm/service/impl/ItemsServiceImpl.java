@@ -26,4 +26,16 @@ public class ItemsServiceImpl implements ItemsService {
 		return itemsMapperCustom.findItemsList(itemsQueryVo);
 	}
 
+	@Override
+	public ItemsCustom findItemsById(Integer id) throws Exception {
+		return null;
+	}
+
+	@Override
+	public void updateItems(Integer id, ItemsCustom itemsCustom) throws Exception {
+		
+	}
+	
+	
+
 }
