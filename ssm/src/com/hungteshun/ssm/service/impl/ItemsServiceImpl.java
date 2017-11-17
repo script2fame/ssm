@@ -37,7 +37,7 @@ public class ItemsServiceImpl implements ItemsService {
 		Items items = itemsMapper.selectByPrimaryKey(id);
 		//中间对商品信息进行业务处理
 		//....
-		//因为service层涉及到业务，所以最后可能会需要添加其他的字段，所以这里返回ItemsCustom
+		//因为service层涉及到业务，所以最后可能会需要添加其他的字段，所以返回ItemsCustom
 		ItemsCustom itemsCustom = new ItemsCustom();
 		//将items的属性值拷贝到itemsCustom
 		BeanUtils.copyProperties(items, itemsCustom);
