@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hungteshun.ssm.po.ItemsCustom;
+import com.hungteshun.ssm.po.ItemsQueryVo;
 import com.hungteshun.ssm.service.ItemsService;
 
 /**
@@ -91,6 +92,31 @@ public class ItemsController {
 		// 调用service批量删除商品
 		// ...
 
+		return "success";
+	}
+
+	// 批量修改商品展示页面，将商品信息查询出来，在页面中可以编辑商品信息
+	@RequestMapping("/editItemsQuery")
+	public ModelAndView editItemsQuery(HttpServletRequest request, ItemsQueryVo itemsQueryVo) throws Exception {
+
+		// 调用service查找 数据库，查询商品列表
+		List<ItemsCustom> itemsList = itemsService.findItemsList(itemsQueryVo);
+
+		// 返回ModelAndView
+		ModelAndView modelAndView = new ModelAndView();
+		// 相当 于request的setAttribut，在jsp页面中通过itemsList取数据
+		modelAndView.addObject("itemsList", itemsList);
+
+		modelAndView.setViewName("items/editItemsQuery");
+
+		return modelAndView;
+	}
+
+	// 批量修改商品提交
+	// 通过ItemsQueryVo接收批量提交的商品信息，将商品信息存储到itemsQueryVo中itemsList属性中。
+	@RequestMapping("/editItemsAllSubmit")
+	public String editItemsAllSubmit(ItemsQueryVo itemsQueryVo) throws Exception {
+		
 		return "success";
 	}
 }
