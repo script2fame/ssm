@@ -83,4 +83,14 @@ public class ItemsController {
 		// return "forward:queryItems.action";
 		return "success";
 	}
+
+	// 批量删除 商品信息
+	@RequestMapping("/deleteItems")
+	public String deleteItems(Integer[] items_id) throws Exception {
+
+		// 调用service批量删除商品
+		// ...
+
+		return "success";
+	}
 }
