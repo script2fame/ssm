@@ -1,6 +1,8 @@
 package com.hungteshun.ssm.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +37,18 @@ public class ItemsController {
 
 	@Autowired
 	private ItemsService itemsService;
+
+	// 商品分类
+	// itemtypes表示最终将方法返回值放在request中的key
+	@ModelAttribute("itemtypes")
+	public Map<String, String> getItemTypes() {
+
+		Map<String, String> itemTypes = new HashMap<String, String>();
+		itemTypes.put("101", "数码");
+		itemTypes.put("102", "母婴");
+
+		return itemTypes;
+	}
 
 	// 商品查询
 	@RequestMapping("/queryItems")
