@@ -104,14 +104,11 @@ public class ItemsController {
 			for (ObjectError objectError : allErrors) {
 				// 输出错误信息
 				System.out.println(objectError.getDefaultMessage());
-
 			}
 			// 将错误信息传到页面
 			model.addAttribute("allErrors", allErrors);
-
 			// 可以直接使用model将提交pojo回显到页面
 			model.addAttribute("items", itemsCustom);
-
 			// 出错重新到商品修改页面
 			return "items/editItems";
 		}
