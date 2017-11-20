@@ -19,7 +19,6 @@ function requestJson(){
 		success:function(data){//返回json结果
 			alert(data);
 		}
-		
 	});
 	
 	//请求key/value，输出是json
@@ -35,11 +34,8 @@ function requestJson(){
 			success:function(data){//返回json结果
 				alert(data.name);
 			}
-			
 		});
-		
 	}
-	
 }
 
 </script>
