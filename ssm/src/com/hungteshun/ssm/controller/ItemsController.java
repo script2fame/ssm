@@ -82,11 +82,11 @@ public class ItemsController {
 
 		// 调用service根据商品id查询商品信息
 		ItemsCustom itemsCustom = itemsService.findItemsById(items_id);
-
+		
 		// 通过形参中的model将model数据传到页面,将数据填充到request域
 		// 相当于modelAndView.addObject方法
 		model.addAttribute("itemsCustom", itemsCustom);
-
+		
 		return "items/editItems";
 	}
 
