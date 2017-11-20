@@ -1,8 +1,10 @@
 package com.hungteshun.ssm.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hungteshun.ssm.controller.validation.ValidGroup1;
@@ -82,19 +85,19 @@ public class ItemsController {
 
 		// 调用service根据商品id查询商品信息
 		ItemsCustom itemsCustom = itemsService.findItemsById(items_id);
-		
+
 		// 通过形参中的model将model数据传到页面,将数据填充到request域
 		// 相当于modelAndView.addObject方法
 		model.addAttribute("itemsCustom", itemsCustom);
-		
+
 		return "items/editItems";
 	}
 
 	// 商品信息修改提交
 	@RequestMapping("/editItemsSubmit")
 	public String editItemsSubmit(Model model, HttpServletRequest request, Integer id,
-			@Validated(value = { ValidGroup1.class }) ItemsCustom itemsCustom, BindingResult bindingResult)
-			throws Exception {
+			@Validated(value = { ValidGroup1.class }) ItemsCustom itemsCustom, BindingResult bindingResult,
+			MultipartFile items_pic) throws Exception {
 
 		// 获取校验错误信息
 		if (bindingResult.hasErrors()) {
@@ -113,6 +116,26 @@ public class ItemsController {
 			return "items/editItems";
 		}
 
+		// 原始名称
+		String originalFilename = items_pic.getOriginalFilename();
+		// 上传图片
+		if (items_pic != null && originalFilename != null && originalFilename.length() > 0) {
+
+			// 存储图片的物理路径
+			String pic_path = "F:\\develop\\upload\\temp\\";
+
+			// 新的图片名称
+			String newFileName = UUID.randomUUID() + originalFilename.substring(originalFilename.lastIndexOf("."));
+			// 新图片
+			File newFile = new File(pic_path + newFileName);
+
+			// 将内存中的数据写入磁盘
+			items_pic.transferTo(newFile);
+
+			// 将新图片名称写到itemsCustom中
+			itemsCustom.setPic(newFileName);
+
+		}
 		// 调用service更新商品信息，页面需要将商品信息传到此方法
 		itemsService.updateItems(id, itemsCustom);
 
