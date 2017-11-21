@@ -24,6 +24,4 @@ public class CustomException extends Exception {
 		this.message = message;
 	}
 	
-	
-
 }
