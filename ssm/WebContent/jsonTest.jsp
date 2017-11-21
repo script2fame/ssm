@@ -28,7 +28,7 @@ function requestJson(){
 			type:'post',
 			url:'${pageContext.request.contextPath }/responseJson.action',
 			//请求是key/value这里不需要指定contentType，因为默认就 是key/value类型
-			//contentType:'application/json;charset=utf-8',
+			//contentType='application/x-www-form-urlen',
 			//数据格式是json串，商品信息
 			data:'name=手机&price=999',
 			success:function(data){//返回json结果
